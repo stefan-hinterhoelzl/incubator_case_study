@@ -13,8 +13,8 @@ class sensor_CCS811:
 
         # initialize i2c
         i2c = busio.I2C(board.SCL, board.SDA)
+        adafruit_ccs811.setDriveMode(0x01)
         self.sensor = adafruit_ccs811.CCS811(i2c)
-        self.sensor.setDriveMode(0x01)
         print("waiting to initialize")
         # wait for the sensor to be ready and calibrate the thermistor
         while not self.sensor.data_ready:
