@@ -10,8 +10,11 @@ import time
 # print("LED off")
 # GPIO.output(18,GPIO.LOW)
 
-
+print("running")
 fan = OutputDevice(26)
+print("fan on:")
 fan.on()
+print("sleeping...")
 time.sleep(10)
+print("fan off:")
 fan.off()
