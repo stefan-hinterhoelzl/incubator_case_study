@@ -12,7 +12,7 @@ def on_message(client, userdata, msg):
     print(msg.topic + " "+ str(msg.payload))
     #Low Level Driver calls here
 
-client = mqtt.client()
+client = mqtt.Client()
 client.on_connect = on_connect
 client.on_messages = on_message
 
