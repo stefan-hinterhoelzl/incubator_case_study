@@ -8,8 +8,6 @@ class sensor_CCS811:
     def __init__(self):
         # initialize sensor values
         self.temperature = 0.0
-        self.eco2 = 0.0
-        self.tvoc = 0.0
 
         # initialize i2c
         i2c = busio.I2C(board.SCL, board.SDA)
@@ -22,7 +20,7 @@ class sensor_CCS811:
         print("initialized")
         # assign temperature offset
         temp = self.sensor.temperature
-        self.sensor.temp_offset = temp - 25.0
+        #self.sensor.temp_offset = temp - 25.0
 
 
     def update_telemetry(self):
