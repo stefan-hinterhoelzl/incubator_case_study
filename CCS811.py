@@ -10,6 +10,7 @@ class sensor_CCS811:
         self.temperature = 0.0
         self.eco2 = 0.0
         self.tvoc = 0.0
+        #fjhsklfjklsaö
 
         # initialize i2c
         i2c = busio.I2C(board.SCL, board.SDA)
