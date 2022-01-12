@@ -21,8 +21,8 @@ class sensor_CCS811:
 
         print("initialized")
         # assign temperature offset
-        temp = self.sensor.temperature
-        self.sensor.temp_offset = temp - 25.0
+        # temp = self.sensor.temperature
+        # self.sensor.temp_offset = temp - 25.0
 
 
     def update_telemetry(self):
