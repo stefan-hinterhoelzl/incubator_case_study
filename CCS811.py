@@ -29,4 +29,4 @@ class sensor_CCS811:
         self.temperature = self.sensor.temperature
         self.eco2 = self.sensor.eco2
         self.tvoc = self.sensor.tvoc
-        print("tempereatur: "+ self.temperature)
+        print("tempereatur: " , self.temperature)
