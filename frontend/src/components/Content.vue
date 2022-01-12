@@ -8,7 +8,7 @@
     <h3>Heating: {{heating_status}}</h3>
 </section>
 
-<div><button class='btn-primary' @click='printHelloWorld'>Print</button></div>
+<div><button class='btn-primary' @click='handleclick()'>Print</button></div>
 
 <div><button class='btn-primary' @click='createConnection'>Connect</button></div>
 
@@ -21,13 +21,14 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      mtopic: "1101",
+      mtopic: "/test/topic",
       msg: "lalala",
       client: {}
     };
   },
   mounted() {
-    this.client = mqtt.connect("ws://ddns.stefanhinterhoelzl.at:1883", {
+    this.client = mqtt.connect("ws://192.168.11.15:9001", { //for stefan
+    //this.client = mqtt.connect("ws://ddns.stefanhinterhoelzl.at:9001", { //for thomas
       username: "admin",
       password: "admin"
     });
@@ -50,11 +51,3 @@ export default {
   }
 };
 </script>
- 
-<style scoped lang="scss">
-  .content {
- 
-  }
-
-  
-</style>

@@ -10,6 +10,8 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "mqtt": "^4.3.4",
+    "node-sass": "^7.0.1",
+    "saas": "^1.0.0",
     "vue": "^3.0.0"
   },
   "devDependencies": {
