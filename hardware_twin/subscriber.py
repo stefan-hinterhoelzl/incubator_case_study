@@ -9,7 +9,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe(MQTT_PATH)
 
 def on_message(client, userdata, msg):
-    print(msg.topic + " "+ str(msg.payload)[3:])
+    print(msg.topic + " "+ msg.payload.decode())
     #Low Level Driver calls here
 
 client = mqtt.Client()
