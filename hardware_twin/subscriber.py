@@ -4,7 +4,7 @@ import logging
 MQTT_SERVER = "localhost"
 MQTT_PATH = "commands"
 
-logging.basicConfig(filename="logging.log", encoding="utf-8", level=logging.DEBUG)
+logging.basicConfig(filename="home/pi/Documents/incubator_case_study/hardware_twin/logging.log", encoding="utf-8", level=logging.DEBUG)
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
