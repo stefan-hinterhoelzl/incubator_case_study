@@ -1,4 +1,5 @@
 import paho.mqtt.client as mqtt
+import sys
 
 MQTT_SERVER = "localhost"
 MQTT_PATH = "commands"
@@ -9,7 +10,9 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe(MQTT_PATH)
 
 def on_message(client, userdata, msg):
-    print(msg.topic + ": "+ msg.payload.decode())
+    #print(msg.topic + ": "+ msg.payload.decode())
+    sys.stdout.write(msg.topic + ": "+ msg.payload.decode())
+    sys.stdout.flush()
     #Low Level Driver calls here
 
 client = mqtt.Client()
