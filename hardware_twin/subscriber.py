@@ -1,8 +1,10 @@
 import paho.mqtt.client as mqtt
-import sys
+import logging
 
 MQTT_SERVER = "localhost"
 MQTT_PATH = "commands"
+
+logging.basicConfig(filename="logging.log", encoding="utf-8", level=logging.DEBUG)
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
@@ -10,9 +12,7 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe(MQTT_PATH)
 
 def on_message(client, userdata, msg):
-    #print(msg.topic + ": "+ msg.payload.decode())
-    sys.stdout.write(msg.topic + ": "+ msg.payload.decode())
-    sys.stdout.flush()
+    logging.info(msg.topic + ": "+ msg.payload.decode())
     #Low Level Driver calls here
 
 client = mqtt.Client()
