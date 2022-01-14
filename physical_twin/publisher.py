@@ -6,12 +6,13 @@ from CCS811 import sensor_CCS811
 
 MQTT_SERVER = "localhost"
 MQTT_PATH = "data"
+sensor = sensor_CCS811
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
 
     while True:
-        message = sensor_CCS811.update_telemetry()
+        message = sensor.update_telemetry()
         client.publish(MQTT_PATH, message)
         time.sleep(1)
 
