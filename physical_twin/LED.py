@@ -11,7 +11,7 @@ import time
 # GPIO.output(18,GPIO.LOW)
 
 print("running")
-fan = OutputDevice(26)
+fan = OutputDevice(17)
 print("fan on:")
 fan.on()
 print("sleeping...")
