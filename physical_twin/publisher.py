@@ -12,7 +12,7 @@ def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
 
     message = sensor.update_telemetry()
-    client.publish(MQTT_PATH, str(message))
+    client.publish(MQTT_PATH, payload = message, qos = 0, retain=False)
 
 
 def on_publish(client, userdata, msg):
