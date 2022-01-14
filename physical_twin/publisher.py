@@ -7,9 +7,6 @@ from CCS811 import sensor_CCS811
 MQTT_SERVER = "localhost"
 MQTT_PATH = "data"
 
-
-logging.basicConfig(filename="home/pi/Documents/incubator_case_study/physical_twin/publish.log", encoding="utf-8", level=logging.DEBUG)
-
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
 
