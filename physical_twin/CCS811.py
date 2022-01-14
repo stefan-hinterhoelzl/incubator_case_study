@@ -3,6 +3,8 @@ import busio
 import board
 import time
 
+adafruit_ccs811.DRIVE_MODE_1SEC
+
 class sensor_CCS811:
 
     def __init__(self):
