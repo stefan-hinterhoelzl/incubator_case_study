@@ -20,7 +20,7 @@ def on_connect(client, userdata, flags, rc):
 def on_publish(client, userdata, msg):
     logging.info(msg.topic + ": "+ msg.payload.decode())
 
-client = mqtt.Client()
+client = mqtt.Client("client1")
 client.on_connect = on_connect
 client.on_publish = on_publish
 
