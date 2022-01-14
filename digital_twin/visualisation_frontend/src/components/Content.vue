@@ -6,6 +6,7 @@
     <h3>Temperatur: {{temperatur}}</h3>
     <h3>Fan: {{fan_status}}</h3>
     <h3>Heating: {{heating_status}}</h3>
+    <p> {{msg}}</p>
 </section>
 
 <div><button class='btn-primary' @click='handleclick()'>Print</button></div>
@@ -21,8 +22,8 @@ export default {
   name: "HelloWorld",
   data() {
     return {
-      mtopic: "/test/topic",
-      msg: "lalala",
+      mtopic: "data",
+      msg: "no data",
       client: {}
     };
   },
