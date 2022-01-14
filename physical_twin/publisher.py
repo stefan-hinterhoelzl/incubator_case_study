@@ -11,10 +11,8 @@ sensor = sensor_CCS811()
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
 
-    while True:
-        message = sensor.update_telemetry()
-        client.publish(MQTT_PATH, message)
-        time.sleep(1)
+    message = sensor.update_telemetry()
+    client.publish(MQTT_PATH, message)
 
 
 def on_publish(client, userdata, msg):
