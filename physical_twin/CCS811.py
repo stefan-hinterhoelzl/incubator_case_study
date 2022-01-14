@@ -27,5 +27,4 @@ class sensor_CCS811:
 
     def update_telemetry(self):
         self.temperature = self.sensor.temperature
-        print(self.temperature)
         return self.temperature
