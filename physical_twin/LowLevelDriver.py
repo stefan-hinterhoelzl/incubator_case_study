@@ -2,8 +2,8 @@ from gpiozero import OutputDevice
 
 
 class LowLevelDriver:
-    heaterState
-    fanState
+    heaterState = ""
+    fanState = ""
 
     def __init__(self):
         global heaterState
