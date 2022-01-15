@@ -18,13 +18,12 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     logging.info(msg.topic + ": "+ msg.payload.decode())
-    print(msg.topic + ": "+ msg.payload.decode())
 
     m_in = json.loads(msg.payload.decode())
 
-    print(m_in)
+    print(m_in["temp"])
     
-    if (float(m_in["temp"]) < LOWERBOUND):
+    if (float(m_in["temp"]) < HIGHERBOUND):
         client.publish(MQTT_PATH_PUBLISH, payload = "HEATER: ON", qos = 0, retain=False)
     elif (float(m_in["temp"]) > HIGHERBOUND):
         client.publish(MQTT_PATH_PUBLISH, payload = "HEATER: OFF", qos = 0, retain=False)
