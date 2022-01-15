@@ -14,7 +14,7 @@ sensor = sensor_CCS811()
 
 def publish(client):
     data = {}
-    data["time"] = datetime.now()
+    #data["time"] = datetime.now()
     data["temp"] = sensor.update_telemetry()
     data["H"] = LowLevelDriver.getHeaterState()
     data["L"] = LowLevelDriver.getFanState()
