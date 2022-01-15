@@ -1,24 +1,22 @@
 import paho.mqtt.client as mqtt
-import logging
 import time
 from CCS811 import sensor_CCS811
 import json
-from LowLevelDriver import LowLevelDriver
+import LowLevelDriver
 from datetime import datetime
 
 
 MQTT_SERVER = "localhost"
 MQTT_PATH = "data"
 sensor = sensor_CCS811()
-driver = LowLevelDriver()
 
 
 def publish(client):
     data = {}
     #data["time"] = datetime.now()
     data["temp"] = sensor.update_telemetry()
-    data["H"] = driver.getHeaterState()
-    data["L"] = driver.getFanState()
+    data["H"] = LowLevelDriver.heaterState
+    data["L"] = LowLevelDriver.fanState
 
     json_data = json.dumps(data)
 
