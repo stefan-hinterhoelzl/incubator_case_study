@@ -19,9 +19,9 @@ def on_message(client, userdata, msg):
     logging.info(msg.topic + ": "+ msg.payload.decode())
     print(msg.topic + ": "+ msg.payload.decode())
     
-    if (msg.payload.decode() < LOWERBOUND):
+    if (int(msg.payload.decode()) < LOWERBOUND):
         client.publish(MQTT_PATH_PUBLISH, payload = "HEATER: ON", qos = 0, retain=False)
-    elif (msg.payload.decode() > HIGHERBOUND):
+    elif (int(msg.payload.decode()) > HIGHERBOUND):
         client.publish(MQTT_PATH_PUBLISH, payload = "HEATER: OFF", qos = 0, retain=False)
     
 
