@@ -16,8 +16,6 @@ def on_connect(client, userdata, flags, rc):
 
     client.subscribe(MQTT_PATH)
 
-    config.init()
-
 def on_message(client, userdata, msg):
     logging.info(msg.topic + ": "+ msg.payload.decode())
 
