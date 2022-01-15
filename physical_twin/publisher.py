@@ -4,7 +4,7 @@ import time
 from CCS811 import sensor_CCS811
 import json
 import LowLevelDriver
-import datetime
+from datetime import datetime
 
 
 MQTT_SERVER = "localhost"
