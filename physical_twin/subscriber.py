@@ -5,8 +5,7 @@ from gpiozero import OutputDevice
 MQTT_SERVER = "localhost"
 MQTT_PATH = "commands"
 
-heater = OutputDevice(27)
-fan = OutputDevice(17)
+
 
 
 logging.basicConfig(filename="home/pi/Documents/incubator_case_study/physical_twin/logging.log", encoding="utf-8", level=logging.DEBUG)
@@ -17,6 +16,9 @@ def on_connect(client, userdata, flags, rc):
     client.subscribe(MQTT_PATH)
 
 def on_message(client, userdata, msg):
+
+    heater = OutputDevice(27)
+    fan = OutputDevice(17)
     logging.info(msg.topic + ": "+ msg.payload.decode())
 
     message = msg.payload.decode()

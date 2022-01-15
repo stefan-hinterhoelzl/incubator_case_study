@@ -6,8 +6,7 @@ from datetime import datetime
 from gpiozero import OutputDevice
 
 
-heater = OutputDevice(27)
-fan = OutputDevice(17)
+
 
 
 MQTT_SERVER = "localhost"
@@ -16,6 +15,8 @@ sensor = sensor_CCS811()
 
 
 def publish(client):
+    heater = OutputDevice(27)
+    fan = OutputDevice(17)
     data = {}
     #data["time"] = datetime.now()
     data["temp"] = sensor.update_telemetry()
