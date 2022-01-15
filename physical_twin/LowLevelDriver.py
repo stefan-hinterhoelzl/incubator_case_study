@@ -1,38 +1,47 @@
 from gpiozero import OutputDevice
 
-heaterState = "OFF"
-fanState = "OFF"
 
-heater = OutputDevice(27)
-fan = OutputDevice(17)
+class LowLevelDriver:
+    heaterState
+    fanState
 
-def heaterON():
-    global heaterState
-    if (heaterState == "OFF"):
-        heater.on()
-        heaterState = "ON"
-
-def heaterOFF():
-    global heaterState
-    if (heaterState == "ON"):
-        heater.off()
+    def __init__(self):
+        global heaterState
         heaterState = "OFF"
-
-def fanON():
-    global fanState
-    if (fanState == "OFF"):
-        fan.on()
-        fanState = "ON"
-
-def fanOFF():
-    global fanState
-    if (fanState == "ON"):
-        fan.off()
+        global fanState
         fanState = "OFF"
 
-def getHeaterState():
-    return heaterState
+    def heaterON():
+        heater = OutputDevice(27)
+        global heaterState
+        if (heaterState == "OFF"):
+            heater.on()
+            heaterState = "ON"
 
-def getFanState():
-    return fanState
+    def heaterOFF():
+        heater = OutputDevice(27)
+        global heaterState
+        if (heaterState == "ON"):
+            heater.off()
+            heaterState = "OFF"
+
+    def fanON():
+        fan = OutputDevice(17)
+        global fanState
+        if (fanState == "OFF"):
+            fan.on()
+            fanState = "ON"
+
+    def fanOFF():
+        fan = OutputDevice(17)
+        global fanState
+        if (fanState == "ON"):
+            fan.off()
+            fanState = "OFF"
+
+    def getHeaterState():
+        return heaterState
+
+    def getFanState():
+        return fanState
 
