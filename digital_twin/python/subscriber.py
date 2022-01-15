@@ -24,10 +24,10 @@ def on_message(client, userdata, msg):
     print(m_in["temp"])
     
     if (float(m_in["temp"]) < HIGHERBOUND):
-        if (m_in["H"] == "OFF"):
+        if (m_in["H"] == 0):
             client.publish(MQTT_PATH_PUBLISH, payload = "HEATER: ON", qos = 0, retain=False)
     elif (float(m_in["temp"]) > HIGHERBOUND):
-        if (m_in["H"] == "ON"):
+        if (m_in["H"] == 1):
             client.publish(MQTT_PATH_PUBLISH, payload = "HEATER: OFF", qos = 0, retain=False)
     
 
