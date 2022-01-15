@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 import logging
+import json
 
 MQTT_SERVER = "192.168.11.15"
 MQTT_PATH_SUBSCRIBE = "data"
@@ -18,10 +19,14 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
     logging.info(msg.topic + ": "+ msg.payload.decode())
     print(msg.topic + ": "+ msg.payload.decode())
+
+    m_in = json.loads(msg.payload.decode())
+
+    print(m_in)
     
-    if (float(msg.payload.decode()) < LOWERBOUND):
+    if (float(m_in["temp"]) < LOWERBOUND):
         client.publish(MQTT_PATH_PUBLISH, payload = "HEATER: ON", qos = 0, retain=False)
-    elif (float(msg.payload.decode()) > HIGHERBOUND):
+    elif (float(m_in["temp"]) > HIGHERBOUND):
         client.publish(MQTT_PATH_PUBLISH, payload = "HEATER: OFF", qos = 0, retain=False)
     
 
