@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 import logging
+import LowLevelDriver
 
 MQTT_SERVER = "localhost"
 MQTT_PATH = "commands"
@@ -13,7 +14,15 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     logging.info(msg.topic + ": "+ msg.payload.decode())
-    #Low Level Driver calls here
+
+    message = msg.payload.decode()
+
+    if (message == "HEATER: ON"):
+        LowLevelDriver.heaterON()
+    
+    elif (message == "HEATER: OFF"):
+        LowLevelDriver.heaterOFF()
+        
 
 client = mqtt.Client("client2")
 client.on_connect = on_connect

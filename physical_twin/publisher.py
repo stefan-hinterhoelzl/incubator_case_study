@@ -2,6 +2,8 @@ import paho.mqtt.client as mqtt
 import logging
 import time
 from CCS811 import sensor_CCS811
+import json
+import LowLevelDriver
 
 
 MQTT_SERVER = "localhost"
@@ -10,9 +12,16 @@ sensor = sensor_CCS811()
 
 
 def publish(client):
-    message = sensor.update_telemetry()
-    print(message)
-    client.publish(MQTT_PATH, payload = message, qos = 0, retain=False)
+    data = {}
+    data["temp"] = sensor.update_telemetry()
+    data["H"] = LowLevelDriver.getHeaterState()
+    data["L"] = LowLevelDriver.getFanState()
+
+    json_data = json.dumps(data)
+
+    print(json_data)
+
+    client.publish(MQTT_PATH, payload = json_data, qos = 0, retain=False)
 
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
