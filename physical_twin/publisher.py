@@ -2,9 +2,12 @@ import paho.mqtt.client as mqtt
 import time
 from CCS811 import sensor_CCS811
 import json
-import LowLevelDriver
 from datetime import datetime
+from gpiozero import OutputDevice
 
+
+heater = OutputDevice(27)
+fan = OutputDevice(17)
 
 
 MQTT_SERVER = "localhost"
@@ -16,8 +19,8 @@ def publish(client):
     data = {}
     #data["time"] = datetime.now()
     data["temp"] = sensor.update_telemetry()
-    #data["H"] = heaterState
-    #data["L"] = fanState
+    data["H"] = heater.value
+    data["L"] = fan.value
 
     json_data = json.dumps(data)
 
