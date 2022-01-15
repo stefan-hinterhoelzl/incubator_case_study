@@ -6,7 +6,7 @@ MQTT_SERVER = "192.168.11.15"
 MQTT_PATH_SUBSCRIBE = "data"
 MQTT_PATH_PUBLISH = "commands"
 LOWERBOUND = 25
-HIGHERBOUND = 35
+HIGHERBOUND = 28
 
 
 logging.basicConfig(filename="D:\Repos\incubator_case_study\incubator_case_study\digital_twin\python\subscriberdata.log", encoding="utf-8", level=logging.DEBUG)
