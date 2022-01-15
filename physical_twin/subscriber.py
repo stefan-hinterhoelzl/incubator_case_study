@@ -1,9 +1,15 @@
 import paho.mqtt.client as mqtt
 import logging
-import LowLevelDriver
+from gpiozero import OutputDevice
 
 MQTT_SERVER = "localhost"
 MQTT_PATH = "commands"
+
+HEATERSTATE = "OFF"
+FANSTATE = "OFF"
+
+HEATER = OutputDevice(27)
+FAN = OutputDevice(17)
 
 logging.basicConfig(filename="home/pi/Documents/incubator_case_study/physical_twin/logging.log", encoding="utf-8", level=logging.DEBUG)
 
@@ -18,10 +24,16 @@ def on_message(client, userdata, msg):
     message = msg.payload.decode()
 
     if (message == "HEATER: ON"):
-        LowLevelDriver.heaterON()
+        if (HEATERSTATE == "OFF"):
+            HEATER.on()
+            HEATERSTATE = "ON"
+
     
     elif (message == "HEATER: OFF"):
-        LowLevelDriver.heaterOFF()
+        if (HEATERSTATE == "ON"):
+            HEATER.off()
+            HEATERSTATE = "OFF"
+       
 
 
 client = mqtt.Client("client2")
