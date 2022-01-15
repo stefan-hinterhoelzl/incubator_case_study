@@ -4,6 +4,7 @@ from CCS811 import sensor_CCS811
 import json
 import LowLevelDriver
 from datetime import datetime
+from LowLevelDriver import heaterState, fanState
 
 
 MQTT_SERVER = "localhost"
@@ -15,8 +16,8 @@ def publish(client):
     data = {}
     #data["time"] = datetime.now()
     data["temp"] = sensor.update_telemetry()
-    data["H"] = LowLevelDriver.heaterState
-    data["L"] = LowLevelDriver.fanState
+    data["H"] = heaterState
+    data["L"] = fanState
 
     json_data = json.dumps(data)
 
