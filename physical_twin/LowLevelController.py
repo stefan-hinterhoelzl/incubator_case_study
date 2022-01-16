@@ -39,6 +39,7 @@ def publishData(client):
 
 def on_message(client, userdata, msg):
     message = msg.payload.decode()
+    print(message)
 
     if (message == "HEATER: ON"):
         if (heater.value == 0):
