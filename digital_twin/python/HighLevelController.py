@@ -6,7 +6,7 @@ MQTT_SERVER = "192.168.11.15"
 MQTT_PATH_SUBSCRIBE = "data"
 MQTT_PATH_PUBLISH = "commands"
 LOWERBOUND = 25
-HIGHERBOUND = 30
+HIGHERBOUND = 28
 
 
 def on_connect(client, userdata, flags, rc):
@@ -23,9 +23,12 @@ def on_message(client, userdata, msg):
 
     if (float(m_in["temp"]) < HIGHERBOUND):
         data["H"] = 1
+        data["F"] = 0
 
     else:
         data["H"] = 0
+        data["F"] = 1
+
     
     json_object = json.dumps(data)
     

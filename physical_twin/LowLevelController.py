@@ -62,7 +62,15 @@ try:
                 GPIO.output(15, GPIO.LOW)
                 HEATER_IS_ON = 0
         
+        if (m_in["F"] == 1):
+            if (FAN_IS_ON == 0):
+                GPIO.output(14, GPIO.HIGH)
+                FAN_IS_ON = 1
         
+        elif (m_in["F"] == 0):
+            if (FAN_IS_ON == 1):
+                GPIO.output(14, GPIO.LOW)
+                FAN_IS_ON = 0
 
         time.sleep(TIMEOUT)
         publishData(client)
