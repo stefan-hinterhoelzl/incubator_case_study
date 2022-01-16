@@ -12,9 +12,11 @@ import time
 
 print("running")
 heater = OutputDevice(15)
+print(heater.value)
 print("heater on:")
 heater.on()
 print("sleeping...")
+print(heater.value)
 time.sleep(30)
 print("heater off:")
 heater.off()
