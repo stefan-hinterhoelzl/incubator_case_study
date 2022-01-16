@@ -31,8 +31,8 @@ def on_connect(client, userdata, flags, rc):
 def publishData(client):
     data = {}
     data["temp"] = sensor.update_telemetry()
-    data["H"] = GPIO.output(27)
-    data["L"] = GPIO.output(17)
+    data["H"] = GPIO.input(27)
+    data["L"] = GPIO.input(17)
     json_data = json.dumps(data)
 
     print(json_data)
@@ -46,8 +46,8 @@ def on_message(client, userdata, msg):
     #Maybe still change logic of commands here, lets see
 
     if (m_in["H"] == 1):
-        if (GPIO.output(27) == 0):
-            GPIO.output(27, GPIO.HIGH)
+        if (GPIO.input(27) == 0):
+            GPIO.input(27, GPIO.HIGH)
     
     elif (m_in["H"] == 0):
         if (GPIO.output(27) == 1):
