@@ -1,17 +1,19 @@
 import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
-GPIO.setup(17, GPIO.OUT)
-GPIO.setup(27, GPIO.OUT)
+GPIO.setup(14, GPIO.OUT)
+GPIO.setup(15, GPIO.OUT)
 
-GPIO.output(17, GPIO.LOW)
-GPIO.output(27, GPIO.LOW)
+GPIO.output(14, GPIO.LOW)
+GPIO.output(15, GPIO.LOW)
 
-print(GPIO.input(17))
-print(GPIO.input(27))
+print(GPIO.input(14))
+print(GPIO.input(15))
 
-GPIO.output(17, GPIO.HIGH)
-GPIO.output(27, GPIO.HIGH)
+GPIO.output(14, GPIO.HIGH)
+GPIO.output(15, GPIO.HIGH)
 
-print(GPIO.input(17))
-print(GPIO.input(27))
+print(GPIO.input(14))
+print(GPIO.input(15))
+
+GPIO.cleanup()
