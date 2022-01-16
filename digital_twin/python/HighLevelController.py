@@ -22,16 +22,10 @@ def on_message(client, userdata, msg):
     data = {}
 
     if (float(m_in["temp"]) < HIGHERBOUND):
-        if (m_in["H"] == 0):
-            data["H"] = 1
-        else: 
-            data["H"] = 0
+        data["H"] = 1
 
-    elif (float(m_in["temp"]) > HIGHERBOUND):
-        if (m_in["H"] == 1):
-            data["H"] = 0
-        else:
-            data["H"] = 1
+    else:
+        data["H"] = 0
     
     json_object = json.dumps(data)
     
