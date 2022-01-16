@@ -9,15 +9,12 @@ LOWERBOUND = 25
 HIGHERBOUND = 30
 
 
-logging.basicConfig(filename="D:\Repos\incubator_case_study\incubator_case_study\digital_twin\python\subscriberdata.log", encoding="utf-8", level=logging.DEBUG)
-
 def on_connect(client, userdata, flags, rc):
     print("Connected with result code "+str(rc))
 
     client.subscribe(MQTT_PATH_SUBSCRIBE)
 
 def on_message(client, userdata, msg):
-    logging.info(msg.topic + ": "+ msg.payload.decode())
 
     m_in = json.loads(msg.payload.decode())
 
@@ -32,7 +29,7 @@ def on_message(client, userdata, msg):
     
 
 def on_publish(client, userdata, msg):
-    print("command sent")
+    print(msg.topic+ ":" + msg.payload.decode())
 
 client = mqtt.Client()
 client.on_connect = on_connect
