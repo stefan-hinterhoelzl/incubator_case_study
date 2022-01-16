@@ -29,6 +29,12 @@ def on_connect(client, userdata, flags, rc):
 
 
 def publishData(client):
+    heater_is_on = GPIO.input(27)
+    fan_is_on = GPIO.input(17)
+
+    print(heater_is_on)
+    print(fan_is_on)
+
     data = {}
     data["temp"] = sensor.update_telemetry()
     data["H"] = GPIO.input(27)
