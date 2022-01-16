@@ -40,7 +40,7 @@ export default {
     });
     this.client.on("message", (topic, message) => {
       var json = JSON.parse(message)
-      this.temp = json.temp;
+      this.temp = (json.temp).toFixed(2);
       this.H = json.H
       this.F = json.F
     });
