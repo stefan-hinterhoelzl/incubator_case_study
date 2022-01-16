@@ -37,7 +37,7 @@ try:
         data = {}
         data["temp"] = sensor.update_telemetry()
         data["H"] = HEATER_IS_ON
-        data["L"] = FAN_IS_ON
+        data["F"] = FAN_IS_ON
         json_data = json.dumps(data)
 
         print(json_data)
