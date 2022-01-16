@@ -22,13 +22,7 @@ def on_connect(client, userdata, flags, rc):
 
     client.subscribe(MQTT_PATH_SUBSCRIBE)
 
-    publishCycle(client)
-
-
-def publishCycle(client):
     publishData(client)
-    time.sleep(TIMEOUT)
-    publishCycle(client)
 
 
 def publishData(client):
@@ -55,7 +49,9 @@ def on_message(client, userdata, msg):
             heater.off()
 
 def on_publish(client, userdata, msg):
-    pass
+    time.sleep(TIMEOUT)
+    publishData(client)
+
 
 
 
