@@ -3,8 +3,13 @@ import time
 from CCS811 import sensor_CCS811
 import json
 from datetime import datetime
-from gpiozero import OutputDevice
+#from gpiozero import OutputDevice
+import RPi.GPIO as GPIO
 
+#GPIO Stuff
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(17, GPIO.OUT)
+GPIO.setup(27, GPIO.OUT)
 
 
 
@@ -13,8 +18,7 @@ MQTT_PATH_PUBLISH = "data"
 MQTT_PATH_SUBSCRIBE = "commands"
 TIMEOUT = 5
 sensor = sensor_CCS811()
-heater = OutputDevice(27)
-fan = OutputDevice(17)
+
 
 
 def on_connect(client, userdata, flags, rc):
@@ -27,8 +31,8 @@ def on_connect(client, userdata, flags, rc):
 def publishData(client):
     data = {}
     data["temp"] = sensor.update_telemetry()
-    data["H"] = heater.is_lit
-    data["L"] = fan.is_lit
+    data["H"] = GPIO.output(27)
+    data["L"] = GPIO.output(17)
     json_data = json.dumps(data)
 
     print(json_data)
@@ -42,12 +46,12 @@ def on_message(client, userdata, msg):
     #Maybe still change logic of commands here, lets see
 
     if (m_in["H"] == 1):
-        if (heater.value == 0):
-            heater.on()
+        if (GPIO.output(27) == 0):
+            GPIO.output(27, GPIO.HIGH)
     
     elif (m_in["H"] == 0):
-        if (heater.value == 1):
-            heater.off()
+        if (GPIO.output(27) == 1):
+           GPIO.output(27, GPIO.LOW)
     
     
 
