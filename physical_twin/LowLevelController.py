@@ -10,8 +10,8 @@ try:
 
     #GPIO Stuff
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(14, GPIO.OUT)
-    GPIO.setup(15, GPIO.OUT)
+    GPIO.setup(14, GPIO.OUT, initial = GPIO.LOW)
+    GPIO.setup(15, GPIO.OUT, initial = GPIO.LOW)
 
 
 
