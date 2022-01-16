@@ -10,8 +10,8 @@ try:
 
     #GPIO Stuff
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(17, GPIO.OUT)
-    GPIO.setup(27, GPIO.OUT)
+    GPIO.setup(14, GPIO.OUT)
+    GPIO.setup(15, GPIO.OUT)
 
 
 
@@ -20,6 +20,8 @@ try:
     MQTT_PATH_SUBSCRIBE = "commands"
     TIMEOUT = 5
     sensor = sensor_CCS811()
+    HEATER_IS_ON = 0
+    FAN_IS_ON = 0
 
 
 
@@ -31,16 +33,11 @@ try:
 
 
     def publishData(client):
-        heater_is_on = GPIO.input(27)
-        fan_is_on = GPIO.input(17)
-
-        print(heater_is_on)
-        print(fan_is_on)
 
         data = {}
         data["temp"] = sensor.update_telemetry()
-        data["H"] = heater_is_on
-        data["L"] = fan_is_on
+        data["H"] = HEATER_IS_ON
+        data["L"] = FAN_IS_ON
         json_data = json.dumps(data)
 
         print(json_data)
@@ -51,15 +48,19 @@ try:
     def on_message(client, userdata, msg): 
         m_in = json.loads(msg.payload.decode())
         print(m_in)
-        #Maybe still change logic of commands here, lets see
+        
+        global HEATER_IS_ON
+        global FAN_IS_ON
 
         if (m_in["H"] == 1):
-            if (GPIO.input(27) == 0):
-                GPIO.output(27, GPIO.HIGH)
+            if (HEATER_IS_ON == 0):
+                GPIO.output(15, GPIO.HIGH)
+                HEATER_IS_ON = 1
         
         elif (m_in["H"] == 0):
-            if (GPIO.input(27) == 1):
-                GPIO.output(27, GPIO.LOW)
+            if (HEATER_IS_ON == 1):
+                GPIO.output(15, GPIO.LOW)
+                HEATER_IS_ON = 0
         
         
 
