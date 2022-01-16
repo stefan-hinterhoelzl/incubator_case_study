@@ -1,4 +1,3 @@
-from asyncio.streams import _ClientConnectedCallback
 import paho.mqtt.client as mqtt
 import time
 from CCS811 import sensor_CCS811
@@ -51,7 +50,7 @@ def on_message(client, userdata, msg):
             heater.off()
     
     
-    
+
     time.sleep(TIMEOUT)
     publishData(client)
 
