@@ -8,11 +8,6 @@
     <h3>Heating: {{H}}</h3>
 </section>
 
-<div><button class='btn-primary' @click='handleclick()'>Print</button></div>
-
-<div><button class='btn-primary' @click='createConnection'>Connect</button></div>
-
-
 </template>
  
 <script>
