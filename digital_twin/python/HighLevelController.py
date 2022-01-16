@@ -18,14 +18,25 @@ def on_message(client, userdata, msg):
 
     m_in = json.loads(msg.payload.decode())
     print(m_in)
-    
+
+    data = {}
+
     if (float(m_in["temp"]) < HIGHERBOUND):
         if (m_in["H"] == 0):
-            client.publish(MQTT_PATH_PUBLISH, payload = "HEATER: ON", qos = 0, retain=False)
+            data["H"] = 1
+        else: 
+            data["H"] = 0
+
     elif (float(m_in["temp"]) > HIGHERBOUND):
         if (m_in["H"] == 1):
-            client.publish(MQTT_PATH_PUBLISH, payload = "HEATER: OFF", qos = 0, retain=False)
+            data["H"] = 0
+        else:
+            data["H"] = 1
     
+    json_object = json.dumps(data)
+    
+    client.publish(MQTT_PATH_PUBLISH, payload = json_object, qos = 0, retain=False)
+
 
 def on_publish(client, userdata, result):
    pass

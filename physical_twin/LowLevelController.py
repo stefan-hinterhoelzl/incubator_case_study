@@ -1,3 +1,4 @@
+from asyncio.streams import _ClientConnectedCallback
 import paho.mqtt.client as mqtt
 import time
 from CCS811 import sensor_CCS811
@@ -36,21 +37,26 @@ def publishData(client):
     client.publish(MQTT_PATH_PUBLISH, payload = json_data, qos = 0, retain=False)
 
 
-def on_message(client, userdata, msg):
-    message = msg.payload.decode()
-    print(message)
+def on_message(client, userdata, msg): 
+    m_in = json.loads(msg.payload.decode())
+    print(m_in)
+    #Maybe still change logic of commands here, lets see
 
-    if (message == "HEATER: ON"):
+    if (m_in["H"] == 1):
         if (heater.value == 0):
             heater.on()
     
-    elif (message == "HEATER: OFF"):
+    elif (m_in["H"] == 0):
         if (heater.value == 1):
             heater.off()
+    
+    
+    
+    time.sleep(TIMEOUT)
+    publishData(client)
+
 
 def on_publish(client, userdata, msg):
-    #time.sleep(TIMEOUT)
-    #publishData(client)
     pass
 
 
