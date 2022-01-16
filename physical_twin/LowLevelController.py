@@ -54,11 +54,15 @@ def on_message(client, userdata, msg):
         if (heater.value == 1):
             heater.off()
 
+def on_publish(client, userdata, msg):
+    pass
+
 
 
 client = mqtt.Client("client1")
 client.on_connect = on_connect
 client.on_message = on_message
+client.on_publish = on_publish
 
 client.username_pw_set(username = "admin", password = "admin")
 
