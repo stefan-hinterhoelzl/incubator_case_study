@@ -27,8 +27,8 @@ def on_connect(client, userdata, flags, rc):
 def publishData(client):
     data = {}
     data["temp"] = sensor.update_telemetry()
-    data["H"] = heater.value
-    data["L"] = fan.value
+    data["H"] = heater.is_lit
+    data["L"] = fan.is_lit
     json_data = json.dumps(data)
 
     print(json_data)
