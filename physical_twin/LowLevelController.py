@@ -37,8 +37,8 @@ def publishData(client):
 
     data = {}
     data["temp"] = sensor.update_telemetry()
-    data["H"] = GPIO.input(27)
-    data["L"] = GPIO.input(17)
+    data["H"] = heater_is_on
+    data["L"] = fan_is_on
     json_data = json.dumps(data)
 
     print(json_data)
