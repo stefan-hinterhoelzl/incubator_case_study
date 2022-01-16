@@ -47,10 +47,10 @@ def on_message(client, userdata, msg):
 
     if (m_in["H"] == 1):
         if (GPIO.input(27) == 0):
-            GPIO.input(27, GPIO.HIGH)
+            GPIO.output(27, GPIO.HIGH)
     
     elif (m_in["H"] == 0):
-        if (GPIO.output(27) == 1):
+        if (GPIO.input(27) == 1):
            GPIO.output(27, GPIO.LOW)
     
     
