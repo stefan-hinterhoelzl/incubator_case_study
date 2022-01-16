@@ -29,7 +29,7 @@ def on_message(client, userdata, msg):
     
 
 def on_publish(client, userdata, msg):
-    print(msg.topic+ ":" + msg.payload.decode())
+    print("Commands :" + msg)
 
 client = mqtt.Client()
 client.on_connect = on_connect
