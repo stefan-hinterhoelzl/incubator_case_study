@@ -17,8 +17,7 @@ def on_connect(client, userdata, flags, rc):
 def on_message(client, userdata, msg):
 
     m_in = json.loads(msg.payload.decode())
-
-    print(m_in["temp"])
+    print(m_in)
     
     if (float(m_in["temp"]) < HIGHERBOUND):
         if (m_in["H"] == 0):
@@ -28,8 +27,8 @@ def on_message(client, userdata, msg):
             client.publish(MQTT_PATH_PUBLISH, payload = "HEATER: OFF", qos = 0, retain=False)
     
 
-def on_publish(client, userdata, msg):
-    print(msg.payload())
+def on_publish(client, userdata, result):
+   pass
 
 client = mqtt.Client()
 client.on_connect = on_connect
