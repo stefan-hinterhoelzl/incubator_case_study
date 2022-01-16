@@ -11,7 +11,7 @@ import time
 # GPIO.output(18,GPIO.LOW)
 
 print("running")
-heater = OutputDevice(27)
+heater = OutputDevice(15)
 print("heater on:")
 heater.on()
 print("sleeping...")
