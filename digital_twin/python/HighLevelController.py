@@ -1,3 +1,4 @@
+from tkinter import CURRENT
 import paho.mqtt.client as mqtt
 import logging
 import json
@@ -7,6 +8,7 @@ MQTT_PATH_SUBSCRIBE = "data"
 MQTT_PATH_PUBLISH = "commands"
 LOWERBOUND = 25
 HIGHERBOUND = 28
+CURRENTSTATE = ""
 
 
 def on_connect(client, userdata, flags, rc):
@@ -21,13 +23,33 @@ def on_message(client, userdata, msg):
 
     data = {}
 
-    if (float(m_in["temp"]) < HIGHERBOUND):
-        data["H"] = 1
-        data["F"] = 0
+    global CURRENTSTATE
+    if (CURRENTSTATE == ""):
+        if (float(m_in["temp"]) < HIGHERBOUND):
+            CURRENTSTATE = "H"
+        else:
+            CURRENTSTATE = "F"
+
+
+    if (CURRENTSTATE == "H"):
+        if (float(m_in["temp"]) < HIGHERBOUND):
+            data["H"] = 1
+            data["F"] = 0
+        else:
+            data["H"] = 0
+            data["F"] = 1
+            CURRENTSTATE = "F"
 
     else:
-        data["H"] = 0
-        data["F"] = 1
+        if (float(m_in["temp"]) < LOWERBOUND):
+            data["H"] = 1
+            data["F"] = 0
+            CURRENTSTATE = "H"
+        else:
+            data["H"] = 0
+            data["F"] = 1
+            
+        
 
     
     json_object = json.dumps(data)
