@@ -1,12 +1,11 @@
 <template lang="html">
   <section class="content">
-    <h1>Content Component</h1>
+    <h1>Dashboard - Incubator Digital Twin</h1>
   </section>
   <section>
-    <h3>Temperatur: {{temperatur}}</h3>
-    <h3>Fan: {{fan_status}}</h3>
-    <h3>Heating: {{heating_status}}</h3>
-    <p> {{msg}}</p>
+    <h3>Temperatur: {{temp}}</h3>
+    <h3>Fan: {{F}}</h3>
+    <h3>Heating: {{H}}</h3>
 </section>
 
 <div><button class='btn-primary' @click='handleclick()'>Print</button></div>
@@ -24,6 +23,9 @@ export default {
     return {
       mtopic: "data",
       msg: "no data",
+      temp: "N/A",
+      H: "N/A",
+      F: "N/A",
       client: {}
     };
   },
@@ -42,7 +44,10 @@ export default {
       });
     });
     this.client.on("message", (topic, message) => {
-      this.msg = message
+      var json = JSON.parse(message)
+      this.temp = json.temp;
+      this.H = json.H
+      this.F = json.F
     });
   },
   methods: {
