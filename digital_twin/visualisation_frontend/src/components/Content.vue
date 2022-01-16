@@ -3,11 +3,16 @@
     <h1>Dashboard - Incubator Digital Twin</h1>
   </section>
   <section>
+    <h2>Aktuelle Daten vom Inkubator</h2>
     <h3>Temperatur: {{temp}}</h3>
     <h3>Fan: {{F}}</h3>
     <h3>Heating: {{H}}</h3>
 </section>
-
+<section>
+    <h2>Aktuelle Anweisung an den Inkubator</h2>
+    <h3>Fan: {{cF}}</h3>
+    <h3>Heating: {{cH}}</h3>
+</section>
 </template>
  
 <script>
@@ -21,6 +26,8 @@ export default {
       temp: "N/A",
       H: "N/A",
       F: "N/A",
+      cH: "N/A",
+      cF: "N/A",
       client: {}
     };
   },
@@ -37,13 +44,27 @@ export default {
           console.log("Successful subscription:" + this.mtopic);
         }
       });
+      this.client.subscribe("commands", (err) => {
+        if(!err) {
+          console.log("Successful subscription: commands")
+        }
+      });
+
     });
     this.client.on("message", (topic, message) => {
-      var json = JSON.parse(message)
-      this.temp = (json.temp).toFixed(2);
-      this.H = json.H
-      this.F = json.F
+      if (topic == "data") {
+        var json = JSON.parse(message)
+        this.temp = (json.temp).toFixed(2);
+        this.H = json.H
+        this.F = json.F
+      }
+      else if (topic == "commands") {
+        var json2 = JSON.parse(message)
+        this.cH = json2.H
+        this.cF = json2.F
+      }
     });
+    
   },
   methods: {
     handleclick: function() {
