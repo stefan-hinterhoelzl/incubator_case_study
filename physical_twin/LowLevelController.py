@@ -10,8 +10,8 @@ try:
 
     #GPIO Stuff
     GPIO.setmode(GPIO.BCM)
-    GPIO.setup(14, GPIO.OUT, initial = GPIO.LOW)
-    GPIO.setup(15, GPIO.OUT, initial = GPIO.LOW)
+    GPIO.setup(27, GPIO.OUT, initial = GPIO.LOW)
+    GPIO.setup(17, GPIO.OUT, initial = GPIO.LOW)
 
 
 
@@ -54,22 +54,22 @@ try:
 
         if (m_in["H"] == 1):
             if (HEATER_IS_ON == 0):
-                GPIO.output(15, GPIO.HIGH)
+                GPIO.output(17, GPIO.HIGH)
                 HEATER_IS_ON = 1
         
         elif (m_in["H"] == 0):
             if (HEATER_IS_ON == 1):
-                GPIO.output(15, GPIO.LOW)
+                GPIO.output(17, GPIO.LOW)
                 HEATER_IS_ON = 0
         
         if (m_in["F"] == 1):
             if (FAN_IS_ON == 0):
-                GPIO.output(14, GPIO.HIGH)
+                GPIO.output(27, GPIO.HIGH)
                 FAN_IS_ON = 1
         
         elif (m_in["F"] == 0):
             if (FAN_IS_ON == 1):
-                GPIO.output(14, GPIO.LOW)
+                GPIO.output(27, GPIO.LOW)
                 FAN_IS_ON = 0
 
         time.sleep(TIMEOUT)
